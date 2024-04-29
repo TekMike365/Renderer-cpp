@@ -3,10 +3,10 @@ workspace "HelloWorld"
 
 project "HelloWorld"
    kind "ConsoleApp"
-   language "C"
+   language "C++"
    targetdir "bin/%{cfg.buildcfg}"
 
-   files { "src/**.h", "src/**.c" }
+   files { "src/**.h", "src/**.cpp" }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
