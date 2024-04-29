@@ -1,5 +1,9 @@
 syntax: glob
 
+# Editor specific
+.vscode
+
+# Other
 .DS_Store
 
 *.bak
