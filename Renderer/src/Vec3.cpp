@@ -53,5 +53,21 @@ namespace Renderer {
         return *this;
     }
 
+    float Vec3::Dot(Vec3 const& other) const
+    {
+       return x * other.x +
+              y * other.y +
+              z * other.z;
+    }
+
+    Vec3 Vec3::Cross(Vec3 const& other) const
+    {
+        return Vec3(
+            y * other.z - z * other.y,
+            z * other.x - x * other.z,
+            x * other.y - y * other.x
+        );
+    }
+
 }
 
