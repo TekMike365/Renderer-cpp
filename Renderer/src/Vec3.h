@@ -1,5 +1,8 @@
 #pragma once
 
+#include <sstream>
+#include <string>
+
 namespace Renderer
 {
     class Vec3
@@ -11,6 +14,9 @@ namespace Renderer
         Vec3(float x, float y, float z);
 
         ~Vec3() = default;
+
+        std::string ToString();
+
     };
 
 }

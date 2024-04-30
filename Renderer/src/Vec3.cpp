@@ -12,5 +12,12 @@ namespace Renderer {
     {
     }
 
+    std::string Vec3::ToString()
+    {
+        std::stringstream ss;
+        ss << "[" << x << ", " << y << ", " << z << "]";
+        return ss.str();
+    }
+
 }
 
