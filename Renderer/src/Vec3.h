@@ -24,6 +24,10 @@ namespace Renderer
         Vec3& operator+=(Vec3 const& other);
         Vec3 operator-(Vec3 const& other) const;
         Vec3& operator-=(Vec3 const& other);
+        Vec3 operator*(float scalar) const;
+        Vec3& operator*=(float scalar);
+        Vec3 operator/(float scalar) const;
+        Vec3& operator/=(float scalar);
 
     };
 
