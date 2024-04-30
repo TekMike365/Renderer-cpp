@@ -8,7 +8,13 @@ project "Sandbox"
         "src/**.cpp"
     }
 
-    links { "Renderer" }
+    links {
+        "Renderer"
+    }
+
+    includedirs {
+        "../Renderer/src"
+    }
 
     filter "configurations:Debug"
         defines { "DEBUG" }

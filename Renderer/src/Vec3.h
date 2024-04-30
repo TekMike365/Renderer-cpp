@@ -13,4 +13,5 @@ namespace Renderer
         ~Vec3() = default;
     };
 
-} // namespace Renderer
+}
+

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../../Renderer/src/vec3.h"
+#include "Vec3.h"
 
 int main(void) {
     std::cout << "Hello, World!" << std::endl;
