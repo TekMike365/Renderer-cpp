@@ -54,5 +54,36 @@ namespace Renderer {
         y -= other.y;
         return *this;
     }
+
+    Vec2 Vec2::operator*(float scalar) const
+    {
+        return Vec2(
+            x * scalar,
+            y * scalar
+        );
+    }
+
+    Vec2& Vec2::operator*=(float scalar)
+    {
+        x *= scalar;
+        y *= scalar;
+        return *this;
+    }
+
+    Vec2 Vec2::operator/(float scalar) const
+    {
+        return Vec2(
+            x / scalar,
+            y / scalar
+        );
+    }
+
+    Vec2& Vec2::operator/=(float scalar)
+    {
+        x /= scalar;
+        y /= scalar;
+        return *this;
+    }
+
 }
 
