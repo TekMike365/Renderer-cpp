@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <string>
+#include <cmath>
 
 namespace Renderer
 {
@@ -16,6 +17,8 @@ namespace Renderer
         ~Vec3() = default;
 
         std::string ToString();
+
+        inline float GetScale() const { return std::sqrt(x*x + y*y + z*z); }
 
         float Dot(Vec3 const& other) const;
         Vec3 Cross(Vec3 const& other) const;
