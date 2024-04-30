@@ -18,13 +18,12 @@ namespace Renderer {
         ss << "[" << x << ", " << y << "]";
         return ss.str();
     }
-
+    
     float Vec2::Dot(Vec2 const& other) const
     {
        return x * other.x +
               y * other.y;
     }
-
 
     Vec2 Vec2::operator+(Vec2 const& other) const
     {
