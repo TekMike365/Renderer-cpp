@@ -28,8 +28,6 @@ namespace Renderer
         Vec3& operator*=(float scalar);
         Vec3 operator/(float scalar) const;
         Vec3& operator/=(float scalar);
-
     };
-
 }
 
