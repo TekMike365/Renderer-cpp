@@ -17,6 +17,12 @@ namespace Renderer
 
         std::string ToString();
 
+        Vec3 operator+(Vec3 const& other) const;
+        Vec3& operator+=(Vec3 const& other);
+
+        Vec3 operator-(Vec3 const& other) const;
+        Vec3& operator-=(Vec3 const& other);
+
     };
 
 }
