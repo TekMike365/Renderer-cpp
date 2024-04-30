@@ -19,6 +19,20 @@ namespace Renderer {
         return ss.str();
     }
 
+    void Vec3::Normalize()
+    {
+        float s = GetScale();
+        x /= s;
+        y /= s;
+        z /= s;
+    }
+
+    Vec3 Vec3::GetNormalized() const
+    {
+        float s = GetScale();
+        return Vec3(x/s, y/s, z/s);
+    }
+
     float Vec3::Dot(Vec3 const& other) const
     {
        return x * other.x +

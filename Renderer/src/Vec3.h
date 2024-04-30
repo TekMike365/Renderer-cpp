@@ -16,8 +16,10 @@ namespace Renderer
 
         ~Vec3() = default;
 
-        std::string ToString();
+        void Normalize();
 
+        std::string ToString();
+        Vec3 GetNormalized() const;
         inline float GetScale() const { return std::sqrt(x*x + y*y + z*z); }
 
         float Dot(Vec3 const& other) const;

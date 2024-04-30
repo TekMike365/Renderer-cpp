@@ -16,12 +16,13 @@ namespace Renderer
 
         ~Vec2() = default;
 
-        std::string ToString();
+        void Normalize();
 
+        std::string ToString();
+        Vec2 GetNormalized() const;
         inline float GetScale() const { return std::sqrt(x*x + y*y); }
 
         float Dot(Vec2 const& other) const;
-
         Vec2 operator+(Vec2 const& other) const;
         Vec2& operator+=(Vec2 const& other);
         Vec2 operator-(Vec2 const& other) const;

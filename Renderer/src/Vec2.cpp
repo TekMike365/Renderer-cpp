@@ -12,11 +12,24 @@ namespace Renderer {
     {
     }
 
+    void Vec2::Normalize()
+    {
+        float s = GetScale();
+        x /= s;
+        y /= s;
+    }
+
     std::string Vec2::ToString()
     {
         std::stringstream ss;
         ss << "[" << x << ", " << y << "]";
         return ss.str();
+    }
+
+    Vec2 Vec2::GetNormalized() const
+    {
+        float s = GetScale();
+        return Vec2(x/s, y/s);
     }
     
     float Vec2::Dot(Vec2 const& other) const
