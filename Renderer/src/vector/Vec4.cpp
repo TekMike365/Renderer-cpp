@@ -42,6 +42,16 @@ namespace Renderer {
               w * other.w;
     }
 
+    bool Vec4::operator==(Vec4 const &other) const
+    {
+        return x == other.x && y == other.y && z == other.z && w == other.w;
+    }
+
+    bool Vec4::operator!=(Vec4 const &other) const
+    {
+        return x != other.x || y != other.y || z != other.z || w != other.w;
+    }
+
     Vec4 Vec4::operator+(Vec4 const& other) const
     {
         return Vec4(
