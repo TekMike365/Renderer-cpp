@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "Vec3.h"
+#include "vector/Vec3.h"
 
 int main(void) {
     std::cout << "Hello, World!" << std::endl;
