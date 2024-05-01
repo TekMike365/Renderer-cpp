@@ -24,6 +24,7 @@ namespace Renderer
 
         float Dot(Vec4 const& other) const;
         bool operator==(Vec4 const& other) const;
+        bool operator!=(Vec4 const& other) const;
         Vec4 operator+(Vec4 const& other) const;
         Vec4& operator+=(Vec4 const& other);
         Vec4 operator-(Vec4 const& other) const;

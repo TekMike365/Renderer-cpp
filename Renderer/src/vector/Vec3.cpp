@@ -54,6 +54,11 @@ namespace Renderer {
         return x == other.x && y == other.y && z == other.z;
     }
 
+    bool Vec3::operator!=(Vec3 const &other) const
+    {
+        return x != other.x || y != other.y || z != other.z;
+    }
+
     Vec3 Vec3::operator+(Vec3 const& other) const
     {
         return Vec3(
