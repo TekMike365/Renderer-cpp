@@ -13,6 +13,8 @@ namespace Renderer {
 
         ~Mat4() = default;
 
+        static Mat4 Identity();
+
         std::string ToString() const;
 
     private:
