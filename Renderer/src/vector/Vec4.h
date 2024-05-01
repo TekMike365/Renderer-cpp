@@ -23,6 +23,7 @@ namespace Renderer
         inline float GetScale() const { return std::sqrt(x*x + y*y + z*z + w*w); }
 
         float Dot(Vec4 const& other) const;
+        bool operator==(Vec4 const& other) const;
         Vec4 operator+(Vec4 const& other) const;
         Vec4& operator+=(Vec4 const& other);
         Vec4 operator-(Vec4 const& other) const;
