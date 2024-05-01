@@ -1,5 +1,8 @@
 #pragma once
 
+#include <sstream>
+#include <string>
+
 namespace Renderer {
 
     class Mat4
@@ -9,6 +12,8 @@ namespace Renderer {
         Mat4(float values[4][4]);
 
         ~Mat4() = default;
+
+        std::string ToString() const;
 
     private:
         float m_Vals[4][4];
