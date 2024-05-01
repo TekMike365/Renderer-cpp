@@ -24,7 +24,6 @@ namespace Renderer
 
         float Dot(Vec3 const& other) const;
         Vec3 Cross(Vec3 const& other) const;
-
         Vec3 operator+(Vec3 const& other) const;
         Vec3& operator+=(Vec3 const& other);
         Vec3 operator-(Vec3 const& other) const;
