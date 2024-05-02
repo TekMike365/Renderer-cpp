@@ -38,4 +38,14 @@ namespace Renderer {
         return ss.str();
     }
 
+    float Mat4::GetValue(int m, int n) const
+    {
+        return m_Vals[m][n];
+    }
+
+    void Mat4::SetValue(int m, int n, float val)
+    {
+        m_Vals[m][n] = val;
+    }
+
 }

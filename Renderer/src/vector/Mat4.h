@@ -16,6 +16,8 @@ namespace Renderer {
         static Mat4 Identity();
 
         std::string ToString() const;
+        float GetValue(int m, int n) const;
+        void SetValue(int m, int n, float val);
 
     private:
         float m_Vals[4][4];
