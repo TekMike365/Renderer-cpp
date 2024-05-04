@@ -4,6 +4,8 @@
 #include <string>
 #include <array>
 
+#include "Vec4.h"
+
 namespace Renderer {
 
     class Mat4
@@ -34,6 +36,7 @@ namespace Renderer {
         Mat4& operator/=(float scalar);
         Mat4 operator*(Mat4 const& other) const;
         Mat4& operator*=(Mat4 const& other);
+        Vec4 operator*(Vec4 const& vec) const;
 
     private:
         float m_Vals[16];

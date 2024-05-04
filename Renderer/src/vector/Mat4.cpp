@@ -182,4 +182,14 @@ namespace Renderer {
         return *this;
     }
 
+    Vec4 Mat4::operator*(Vec4 const& vec) const
+    {
+        return Vec4(
+            m_Vals[0] * vec.x + m_Vals[1] * vec.x + m_Vals[2] * vec.x + m_Vals[3] * vec.x,
+            m_Vals[4] * vec.y + m_Vals[5] * vec.y + m_Vals[6] * vec.y + m_Vals[7] * vec.y,
+            m_Vals[8] * vec.z + m_Vals[9] * vec.z + m_Vals[10] * vec.z + m_Vals[11] * vec.z,
+            m_Vals[12] * vec.w + m_Vals[13] * vec.w + m_Vals[14] * vec.w + m_Vals[15] * vec.w
+        );
+    }
+
 }
