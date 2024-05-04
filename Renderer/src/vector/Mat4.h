@@ -9,18 +9,19 @@ namespace Renderer {
     {
     public:
         Mat4();
-        Mat4(float values[4][4]);
+        Mat4(float values[16]);
 
         ~Mat4() = default;
 
         static Mat4 Identity();
+        static int ToIndex(int m, int n);
 
         std::string ToString() const;
         float GetValue(int m, int n) const;
         void SetValue(int m, int n, float val);
 
     private:
-        float m_Vals[4][4];
+        float m_Vals[16];
     };
 
 }
