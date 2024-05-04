@@ -22,6 +22,10 @@ namespace Renderer {
         void SetValue(int m, int n, float val);
         std::array<float, 16> GetValuesArray() const;
 
+        Mat4 operator+(Mat4 const& other) const;
+        Mat4 operator+=(Mat4 const& other);
+        Mat4 operator-(Mat4 const& other) const;
+        Mat4 operator-=(Mat4 const& other);
         Mat4 operator*(float scalar) const;
         Mat4& operator*=(float scalar);
         Mat4 operator/(float scalar) const;

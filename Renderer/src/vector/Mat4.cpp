@@ -94,4 +94,38 @@ namespace Renderer {
         return *this;
     }
 
+    Mat4 Mat4::operator+(Mat4 const& other) const
+    {
+        float vals[16];
+        for (int i = 0; i < 16; i++) {
+            vals[i] = m_Vals[i] + other.m_Vals[i];
+        }
+        return Mat4(vals);
+    }
+
+    Mat4 Mat4::operator+=(Mat4 const& other)
+    {
+        for (int i = 0; i < 16; i++) {
+            m_Vals[i] += other.m_Vals[i];
+        }
+        return *this;
+    }
+
+    Mat4 Mat4::operator-(Mat4 const& other) const
+    {
+        float vals[16];
+        for (int i = 0; i < 16; i++) {
+            vals[i] = m_Vals[i] - other.m_Vals[i];
+        }
+        return Mat4(vals);
+    }
+
+    Mat4 Mat4::operator-=(Mat4 const& other)
+    {
+        for (int i = 0; i < 16; i++) {
+            m_Vals[i] -= other.m_Vals[i];
+        }
+        return *this;
+    }
+
 }
