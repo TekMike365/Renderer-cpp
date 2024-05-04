@@ -32,6 +32,8 @@ namespace Renderer {
         Mat4& operator*=(float scalar);
         Mat4 operator/(float scalar) const;
         Mat4& operator/=(float scalar);
+        Mat4 operator*(Mat4 const& other) const;
+        Mat4& operator*=(Mat4 const& other);
 
     private:
         float m_Vals[16];

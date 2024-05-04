@@ -148,4 +148,43 @@ namespace Renderer {
         return true;
     }
 
+    Mat4 Mat4::operator*(Mat4 const& other) const
+    {
+        float vals[16];
+        for (int m = 0; m < 4; m++) {
+            for (int n = 0; n < 4; n++) {
+                int i = ToIndex(m, n);
+                int i1 = ToIndex(m, 0);
+                int i2 = ToIndex(0, n);
+                vals[i] = m_Vals[i1 + 0] * other.m_Vals[i2 + 0 * 4] +
+                          m_Vals[i1 + 1] * other.m_Vals[i2 + 1 * 4] +
+                          m_Vals[i1 + 2] * other.m_Vals[i2 + 2 * 4] +
+                          m_Vals[i1 + 3] * other.m_Vals[i2 + 3 * 4];
+            }
+        }
+        return Mat4(vals);
+    }
+
+    Mat4& Mat4::operator*=(Mat4 const& other)
+    {
+        float vals[16];
+        for (int m = 0; m < 4; m++) {
+            for (int n = 0; n < 4; n++) {
+                int i = ToIndex(m, n);
+                int i1 = ToIndex(m, 0);
+                int i2 = ToIndex(0, n);
+                vals[i] = m_Vals[i1 + 0] * other.m_Vals[i2 + 0 * 4] +
+                          m_Vals[i1 + 1] * other.m_Vals[i2 + 1 * 4] +
+                          m_Vals[i1 + 2] * other.m_Vals[i2 + 2 * 4] +
+                          m_Vals[i1 + 3] * other.m_Vals[i2 + 3 * 4];
+            }
+        }
+
+        for (int i = 0; i < 16; i++) {
+            m_Vals[i] = vals[i];
+        }
+
+        return *this;
+    }
+
 }
