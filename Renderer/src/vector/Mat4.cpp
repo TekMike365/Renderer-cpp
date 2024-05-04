@@ -60,4 +60,38 @@ namespace Renderer {
         return vals;
     }
 
+    Mat4 Mat4::operator*(float scalar) const
+    {
+        float vals[16];
+        for (int i = 0; i < 16; i++) {
+            vals[i] = m_Vals[i] * scalar;
+        }
+        return Mat4(vals);
+    }
+
+    Mat4& Mat4::operator*=(float scalar)
+    {
+        for (int i = 0; i < 16; i++) {
+            m_Vals[i] *= scalar;
+        }
+        return *this;
+    }
+
+    Mat4 Mat4::operator/(float scalar) const
+    {
+        float vals[16];
+        for (int i = 0; i < 16; i++) {
+            vals[i] = m_Vals[i] / scalar;
+        }
+        return Mat4(vals);
+    }
+
+    Mat4& Mat4::operator/=(float scalar)
+    {
+        for (int i = 0; i < 16; i++) {
+            m_Vals[i] /= scalar;
+        }
+        return *this;
+    }
+
 }
