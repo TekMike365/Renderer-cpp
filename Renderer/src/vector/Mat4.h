@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <string>
+#include <array>
 
 namespace Renderer {
 
@@ -19,6 +20,7 @@ namespace Renderer {
         std::string ToString() const;
         float GetValue(int m, int n) const;
         void SetValue(int m, int n, float val);
+        std::array<float, 16> GetValuesArray() const;
 
     private:
         float m_Vals[16];

@@ -51,4 +51,13 @@ namespace Renderer {
         m_Vals[ToIndex(m, n)] = val;
     }
 
+    std::array<float, 16> Mat4::GetValuesArray() const
+    {
+        std::array<float, 16> vals;
+        for (int i = 0; i < 16; i++) {
+            vals[i] = m_Vals[i];
+        }
+        return vals;
+    }
+
 }
