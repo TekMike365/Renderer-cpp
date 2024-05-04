@@ -5,6 +5,7 @@
 #include <array>
 
 #include "Vec4.h"
+#include "Vec3.h"
 
 namespace Renderer {
 
@@ -18,6 +19,10 @@ namespace Renderer {
 
         static Mat4 Identity();
         inline static int ToIndex(int m, int n) { return m * 4 + n; }
+
+        Mat4& Transform(Vec3 const& xyz);
+        Mat4& Scale(Vec3 const& xyz);
+        Mat4& Rotate(Vec3 const& xyz);
 
         std::string ToString() const;
         float GetValue(int m, int n) const;

@@ -1,5 +1,7 @@
 #include "Mat4.h"
 
+#include <cmath>
+
 namespace Renderer {
 
     Mat4::Mat4()
@@ -24,6 +26,42 @@ namespace Renderer {
             0.0f, 0.0f, 0.0f, 1.0f
         };
         return Mat4(vals);
+    }
+
+    Mat4& Mat4::Transform(Vec3 const& xyz)
+    {
+        m_Vals[ToIndex(0, 3)] += xyz.x;
+        m_Vals[ToIndex(1, 3)] += xyz.y;
+        m_Vals[ToIndex(2, 3)] += xyz.z;
+        return *this;
+    }
+
+    Mat4& Mat4::Scale(Vec3 const& xyz)
+    {
+        m_Vals[ToIndex(0, 0)] *= xyz.x;
+        m_Vals[ToIndex(1, 1)] *= xyz.y;
+        m_Vals[ToIndex(2, 2)] *= xyz.z;
+        return *this;
+    }
+
+    Mat4& Mat4::Rotate(Vec3 const& xyz)
+    {
+        float sinG = std::sin(xyz.x);
+        float sinB = std::sin(xyz.y);
+        float sinA = std::sin(xyz.z);
+        float cosG = std::cos(xyz.x);
+        float cosB = std::cos(xyz.y);
+        float cosA = std::cos(xyz.z);
+        m_Vals[ToIndex(0, 0)] *= cosB * cosG;
+        m_Vals[ToIndex(0, 1)] *= sinA * sinB * cosG - cosA * sinG;
+        m_Vals[ToIndex(0, 2)] *= cosA * sinB * cosG + sinA * sinG;
+        m_Vals[ToIndex(1, 0)] *= cosB * sinG;
+        m_Vals[ToIndex(1, 1)] *= sinA * sinB * sinG + cosA * cosG;
+        m_Vals[ToIndex(1, 2)] *= cosA * sinB * sinG - sinA * cosG;
+        m_Vals[ToIndex(2, 0)] *= -sinB;
+        m_Vals[ToIndex(2, 1)] *= sinA * cosB;
+        m_Vals[ToIndex(2, 2)] *= cosA * cosB;
+        return *this;
     }
 
     std::string Mat4::ToString() const
@@ -122,6 +160,7 @@ namespace Renderer {
         }
         return *this;
     }
+
 
     bool Mat4::operator==(Mat4 const& other) const
     {
