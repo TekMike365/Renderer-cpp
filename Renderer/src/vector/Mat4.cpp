@@ -26,11 +26,6 @@ namespace Renderer {
         return Mat4(vals);
     }
 
-    int Mat4::ToIndex(int m, int n)
-    {
-        return m * 4 + n;
-    }
-
     std::string Mat4::ToString() const
     {
         std::stringstream ss;

@@ -15,7 +15,7 @@ namespace Renderer {
         ~Mat4() = default;
 
         static Mat4 Identity();
-        static int ToIndex(int m, int n);
+        inline static int ToIndex(int m, int n) { return m * 4 + n; }
 
         std::string ToString() const;
         float GetValue(int m, int n) const;
