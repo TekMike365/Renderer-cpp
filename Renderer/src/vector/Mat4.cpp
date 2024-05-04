@@ -128,4 +128,24 @@ namespace Renderer {
         return *this;
     }
 
+    bool Mat4::operator==(Mat4 const& other) const
+    {
+        for (int i = 0; i < 16; i++) {
+            if (m_Vals[i] != other.m_Vals[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool Mat4::operator!=(Mat4 const& other) const
+    {
+        for (int i = 0; i < 16; i++) {
+            if (m_Vals[i] == other.m_Vals[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

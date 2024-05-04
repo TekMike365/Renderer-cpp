@@ -22,6 +22,8 @@ namespace Renderer {
         void SetValue(int m, int n, float val);
         std::array<float, 16> GetValuesArray() const;
 
+        bool operator==(Mat4 const& other) const;
+        bool operator!=(Mat4 const& other) const;
         Mat4 operator+(Mat4 const& other) const;
         Mat4 operator+=(Mat4 const& other);
         Mat4 operator-(Mat4 const& other) const;
