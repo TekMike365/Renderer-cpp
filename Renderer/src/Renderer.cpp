@@ -22,7 +22,7 @@ namespace Renderer {
 
     int Cleanup()
     {
-        delete screen;
+        delete[] screen;
         return 0;
     }
 
@@ -95,5 +95,6 @@ namespace Renderer {
         file.close();
         return 0;
     }
+
 }
 

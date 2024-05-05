@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
 #include "vector/Vec2.h"
 #include "vector/Vec3.h"
 #include "vector/Vec4.h"
