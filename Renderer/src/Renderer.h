@@ -18,6 +18,7 @@ namespace Renderer {
 
     int Init(int width, int height);
     int Cleanup();
+    int SaveBMP(const char* filepath);
 
 }
 
