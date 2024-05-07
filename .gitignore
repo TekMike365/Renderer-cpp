@@ -3,6 +3,9 @@ syntax: glob
 # Editor specific
 .vscode
 
+# Big data
+**.bmp
+
 # Premake
 .DS_Store
 
