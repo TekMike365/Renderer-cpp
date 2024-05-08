@@ -60,7 +60,7 @@ namespace Renderer {
     {
         Vec3 v1 = p1 - p3;
         Vec3 v2 = p2 - p3;
-        return v1.Cross(v2).GetScale() / 2;
+        return std::abs(v1.Cross(v2).GetScale() / 2);
     }
 
     float Lerp(float v1, float v2, float t) 
@@ -102,27 +102,16 @@ namespace Renderer {
         // iterate trough triplets
         for (int i = 0; i < indexCount; i += 3) {
             Vec3 points[3] = {
-                ProjectPoint(vertices[i]),
-                ProjectPoint(vertices[i + 1]),
-                ProjectPoint(vertices[i + 2])
+                ProjectPoint(vertices[i + 0]) + Vec3(0.5, 0.5, 0.0),
+                ProjectPoint(vertices[i + 1]) + Vec3(0.5, 0.5, 0.0),
+                ProjectPoint(vertices[i + 2]) + Vec3(0.5, 0.5, 0.0)
             };
 
             // Convert to pixels
-            bool render = false;
-            for (int i = 0; i < 3; i++) {
-                points[i] *= screenWidth;
-
-                if (points[i].x > -screenWidth / 2 &&
-                    points[i].x < screenWidth / 2 &&
-                    points[i].y > -screenHeight / 2 &&
-                    points[i].y < screenHeight / 2 &&
-                    points[i].z >= 0
-                ) {
-                    render = true;
-                }
+            // TODO: exclude non renderable triangles
+            for (int j = 0; j < 3; j++) {
+                points[j] *= screenWidth;
             }
-            if (!render)
-                continue;
 
 
             int p1_x = (int)std::min(points[0].x, std::min(points[1].x, points[2].x));
@@ -133,10 +122,10 @@ namespace Renderer {
             int height = p2_y - p1_y;
 
             // Rasterize
-            for (int i = 0; i < height; i++) {
-                for (int j = 0; j < width; j++) {
-                    int x = p1_x + j;
-                    int y = p1_y + i;
+            for (int j = 0; j < height; j++) {
+                for (int k = 0; k < width; k++) {
+                    int x = p1_x + k;
+                    int y = p1_y + j;
                     int idx = screenWidth * y + x;
 
                     // is point in triangle?
@@ -148,7 +137,8 @@ namespace Renderer {
                     
                     float tolerance = 1.0f;
                     float diff = a1 + a2 + a3 - a;
-                    bool isInside = diff <= tolerance && diff >= -tolerance;
+                    //bool isInside = diff <= tolerance && diff >= -tolerance;
+                    bool isInside = true;
 
                     if (!isInside)
                         continue;
@@ -167,7 +157,7 @@ namespace Renderer {
                     pixel.g = 0x00;
                     pixel.b = 0xff;
 
-                    screen[i] = pixel;
+                    screen[idx] = pixel;
                 }
             }
         }
