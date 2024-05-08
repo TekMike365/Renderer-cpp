@@ -8,7 +8,7 @@ namespace Renderer {
     Pixel* screen = nullptr;
     int screenWidth = 0;
     int screenHeight = 0;
-    int camera = NONE;
+    int camera = RENDERER_NONE;
 
     int Init(int width, int height)
     {
@@ -36,7 +36,7 @@ namespace Renderer {
 
     int SetCamera(int cameraType)
     {
-        if (cameraType != ORTHOGRAPHIC_CAMERA && cameraType != PERSPECTIVE_CAMERA) {
+        if (cameraType != RENDERER_ORTHOGRAPHIC_CAMERA && cameraType != RENDERER_PERSPECTIVE_CAMERA) {
             return 1;
         }
         camera = cameraType;
@@ -46,11 +46,15 @@ namespace Renderer {
     Vec3 ProjectPoint(Vec3 point) {
         switch (camera)
         {
-            case ORTHOGRAPHIC_CAMERA:
+            case RENDERER_ORTHOGRAPHIC_CAMERA:
                 return point;
-            case PERSPECTIVE_CAMERA:
-                // TODO project point correctly
-                return point;
+            case RENDERER_PERSPECTIVE_CAMERA:
+            {
+                // TODO add focal distance as a setting of FOV
+                float focalDist = 1.036596; // FOV = 60 deg
+                float t = focalDist / (point.z - focalDist);
+                return Vec3(point.x * t, point.y * t, point.z);
+            }
             default:
                 return point;
         }
@@ -145,7 +149,7 @@ namespace Renderer {
                     float a2 = GetTriangleArea(pixelPos, p2, p3);
                     float a3 = GetTriangleArea(pixelPos, p3, p1);
                     
-                    float tolerance = 0.005f;
+                    float tolerance = 0.005;
                     float diff = a1 + a2 + a3 - a;
                     bool isInside = diff <= tolerance && diff >= -tolerance;
 

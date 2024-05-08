@@ -5,9 +5,9 @@
 #include "vector/Vec4.h"
 #include "vector/Mat4.h"
 
-#define NONE 0
-#define ORTHOGRAPHIC_CAMERA 1
-#define PERSPECTIVE_CAMERA 2
+#define RENDERER_NONE 0
+#define RENDERER_ORTHOGRAPHIC_CAMERA 1
+#define RENDERER_PERSPECTIVE_CAMERA 2
 
 namespace Renderer {
 
