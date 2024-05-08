@@ -56,11 +56,13 @@ namespace Renderer {
         }
     }
 
-    float GetTriangleArea(Vec3 p1, Vec3 p2, Vec3 p3)
+    float GetTriangleArea(Vec2 p1, Vec2 p2, Vec2 p3)
     {
-        Vec3 v1 = p1 - p3;
-        Vec3 v2 = p2 - p3;
-        return std::abs(v1.Cross(v2).GetScale() / 2);
+        Vec2 v1 = p1 - p3;
+        Vec2 v2 = p2 - p3;
+        Vec3 a = Vec3(v1.x, v1.y, 0.0);
+        Vec3 b = Vec3(v2.x, v2.y, 0.0);
+        return std::abs(a.Cross(b).GetScale() / 2);
     }
 
     float Lerp(float v1, float v2, float t) 
@@ -102,22 +104,27 @@ namespace Renderer {
         // iterate trough triplets
         for (int i = 0; i < indexCount; i += 3) {
             Vec3 points[3] = {
-                ProjectPoint(vertices[i + 0]) + Vec3(0.5, 0.5, 0.0),
-                ProjectPoint(vertices[i + 1]) + Vec3(0.5, 0.5, 0.0),
-                ProjectPoint(vertices[i + 2]) + Vec3(0.5, 0.5, 0.0)
+                ProjectPoint(vertices[indices[i + 0]]),
+                ProjectPoint(vertices[indices[i + 1]]),
+                ProjectPoint(vertices[indices[i + 2]])
             };
 
             // Convert to pixels
             // TODO: exclude non renderable triangles
             for (int j = 0; j < 3; j++) {
                 points[j] *= screenWidth;
+                points[j] += Vec3(screenWidth / 2, screenHeight / 2, 0.0);
             }
 
 
             int p1_x = (int)std::min(points[0].x, std::min(points[1].x, points[2].x));
+            p1_x = std::max(p1_x, 0);
             int p1_y = (int)std::min(points[0].y, std::min(points[1].y, points[2].y));
+            p1_y = std::max(p1_y, 0);
             int p2_x = (int)std::max(points[0].x, std::max(points[1].x, points[2].x));
+            p2_x = std::min(p2_x, screenWidth);
             int p2_y = (int)std::max(points[0].y, std::max(points[1].y, points[2].y));
+            p2_y = std::min(p2_y, screenHeight);
             int width = p2_x - p1_x;
             int height = p2_y - p1_y;
 
@@ -129,16 +136,18 @@ namespace Renderer {
                     int idx = screenWidth * y + x;
 
                     // is point in triangle?
-                    Vec3 pixelPos = Vec3(x, y, 0);
-                    float a  = GetTriangleArea(points[0], points[1], points[2]);
-                    float a1 = GetTriangleArea(pixelPos, points[0], points[1]);
-                    float a2 = GetTriangleArea(pixelPos, points[1], points[2]);
-                    float a3 = GetTriangleArea(pixelPos, points[2], points[0]);
+                    Vec2 pixelPos = Vec2(x, y);
+                    Vec2 p1 = Vec2(points[0].x, points[0].y);
+                    Vec2 p2 = Vec2(points[1].x, points[1].y);
+                    Vec2 p3 = Vec2(points[2].x, points[2].y);
+                    float a  = GetTriangleArea(p1, p2, p3);
+                    float a1 = GetTriangleArea(pixelPos, p1, p2);
+                    float a2 = GetTriangleArea(pixelPos, p2, p3);
+                    float a3 = GetTriangleArea(pixelPos, p3, p1);
                     
-                    float tolerance = 1.0f;
+                    float tolerance = 0.005f;
                     float diff = a1 + a2 + a3 - a;
-                    //bool isInside = diff <= tolerance && diff >= -tolerance;
-                    bool isInside = true;
+                    bool isInside = diff <= tolerance && diff >= -tolerance;
 
                     if (!isInside)
                         continue;
