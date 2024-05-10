@@ -39,10 +39,10 @@ int main(void) {
     };
 
     Renderer::Mat4 mat = Renderer::Mat4::Identity();
-    mat.Transform(Renderer::Vec3(0.0f, 0.0f, 2.0f));
-    mat.Scale(Renderer::Vec3(1.0f, 1.0f, 1.0f) / 5);
+    mat.Transform(Renderer::Vec3(0.0, 0.0, -2.0));
+    mat.Scale(Renderer::Vec3(1.0, 1.0, 1.0) / 1);
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 8; i++) {
         Renderer::Vec4 oldVertex(vertices[i].x, vertices[i].y, vertices[i].z, 1.0f);
         Renderer::Vec4 newVertex = mat * oldVertex;
         vertices[i] = Renderer::Vec3(newVertex.x, newVertex.y, newVertex.z);

@@ -3,6 +3,8 @@
 #include <iostream>
 #include <fstream>
 
+#define NO_DEPTH_DATA 1
+
 namespace Renderer {
 
     Pixel* screen = nullptr;
@@ -22,7 +24,7 @@ namespace Renderer {
             screen[i].r = 0x00;
             screen[i].g = 0x00;
             screen[i].b = 0x00;
-            screen[i].d = -1;
+            screen[i].d = NO_DEPTH_DATA;
         }
 
         return 0;
@@ -52,7 +54,7 @@ namespace Renderer {
             {
                 // TODO add focal distance as a setting of FOV
                 float focalDist = 1.036596; // FOV = 60 deg
-                float t = focalDist / (point.z - focalDist);
+                float t = focalDist / (focalDist - point.z);
                 return Vec3(point.x * t, point.y * t, point.z);
             }
             default:
@@ -141,17 +143,16 @@ namespace Renderer {
 
                     // is point in triangle?
                     Vec2 pixelPos = Vec2(x, y);
-                    Vec2 p1 = Vec2(points[0].x, points[0].y);
-                    Vec2 p2 = Vec2(points[1].x, points[1].y);
-                    Vec2 p3 = Vec2(points[2].x, points[2].y);
+                    Vec2 p1 = Vec2(std::floor(points[0].x), std::floor(points[0].y));
+                    Vec2 p2 = Vec2(std::floor(points[1].x), std::floor(points[1].y));
+                    Vec2 p3 = Vec2(std::floor(points[2].x), std::floor(points[2].y));
                     float a  = GetTriangleArea(p1, p2, p3);
                     float a1 = GetTriangleArea(pixelPos, p1, p2);
                     float a2 = GetTriangleArea(pixelPos, p2, p3);
                     float a3 = GetTriangleArea(pixelPos, p3, p1);
                     
-                    float tolerance = 0.005;
                     float diff = a1 + a2 + a3 - a;
-                    bool isInside = diff <= tolerance && diff >= -tolerance;
+                    bool isInside = diff == 0.0;
 
                     if (!isInside)
                         continue;
@@ -163,12 +164,12 @@ namespace Renderer {
 
                     float depth = TLerp(points[0].z, points[1].z, points[2].z, lerpVals);
                     Pixel pixel = screen[idx];
-                    if (depth > pixel.d && pixel.d != -1)
+                    if (depth > pixel.d)
                         continue;
                     
-                    pixel.r = 0xff;
-                    pixel.g = 0x00;
-                    pixel.b = 0xff;
+                    pixel.r = 0xff * k / width;
+                    pixel.g = 0xff * j / height;
+                    pixel.b = 0x00;
 
                     screen[idx] = pixel;
                 }
